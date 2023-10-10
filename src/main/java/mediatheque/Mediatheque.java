@@ -7,17 +7,24 @@ import java.util.List;
 public class Mediatheque {
 	private final List<Item> items = new LinkedList<>();
 
+	private final PrintCatalogue printCatalogue = new PrintCatalogue();
+	private final PrintBook printBook = new PrintBook();
+
+	private final PrintCD printCD = new PrintCD();
+
 	public void addItem(Item i) {
 		items.add(i);
 	}
 	
 	public void printCatalog() {
 		for (Item i : items)
-			i.print();
+			i.accept(printCatalogue);
 	}
 	
 	public void printOnlyBooks() {
-		throw new UnsupportedOperationException("Not supported yet."); 
+	for(Item i : items){
+		i.accept(printBook);
+	}
 		/*
 		//avec instanceof
 		for (Item i : items)
@@ -27,7 +34,9 @@ public class Mediatheque {
 	}
 
 	public void printOnlyCDs() {
-		throw new UnsupportedOperationException("Not supported yet."); 
+		for(Item i : items){
+			i.accept(printCD);
+		}
 	}
 
 }
